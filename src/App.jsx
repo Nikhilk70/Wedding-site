@@ -48,18 +48,27 @@ export default function App() {
 
   const names = site ? { groom: firstName(site.groom), bride: firstName(site.bride) } : null;
 
+  const startAt = Number(site?.music?.startAt) || 0;
+
+  /**
+   * Keep playback at or after `startAt`. Phones (especially iPhone Safari) ignore a seek made
+   * before the song has loaded, so this runs on every load/play/time event until it sticks,
+   * and also handles looping back to `startAt` instead of 0:00.
+   */
+  const keepStart = (audio) => {
+    if (!audio || !startAt) return;
+    if (audio.currentTime < startAt - 0.5 && audio.readyState >= 1) {
+      try { audio.currentTime = startAt; } catch { /* not seekable yet; next event retries */ }
+    }
+  };
+
   const startMusic = () => {
     const audio = audioRef.current;
     if (!audio || !site?.music?.file) return;
-    const startAt = Number(site.music.startAt) || 0;
-    const play = () => audio.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-    if (audio.readyState >= 1) {
-      if (audio.currentTime < startAt) audio.currentTime = startAt;
-      play();
-    } else {
-      audio.addEventListener('loadedmetadata', () => { audio.currentTime = startAt; }, { once: true });
-      play();
-    }
+    keepStart(audio);
+    audio.play()
+      .then(() => { keepStart(audio); setPlaying(true); })
+      .catch(() => setPlaying(false));
   };
 
   const toggleMusic = () => {
@@ -79,11 +88,19 @@ export default function App() {
       {site.music?.file && (
         <audio
           ref={audioRef}
-          src={site.music.file}
+          // "#t=40" tells the browser itself to begin at 0:40 (media fragment)
+          src={startAt ? `${site.music.file}#t=${startAt}` : site.music.file}
           preload="auto"
-          loop
-          onLoadedMetadata={(e) => { e.currentTarget.currentTime = Number(site.music.startAt) || 0; }}
-          onEnded={(e) => { e.currentTarget.currentTime = Number(site.music.startAt) || 0; }}
+          onLoadedMetadata={(e) => keepStart(e.currentTarget)}
+          onCanPlay={(e) => keepStart(e.currentTarget)}
+          onPlaying={(e) => keepStart(e.currentTarget)}
+          onTimeUpdate={(e) => keepStart(e.currentTarget)}
+          onEnded={(e) => {
+            // loop from startAt, not from the beginning
+            const a = e.currentTarget;
+            a.currentTime = startAt;
+            a.play().catch(() => setPlaying(false));
+          }}
         />
       )}
 
