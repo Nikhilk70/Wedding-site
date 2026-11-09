@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "submissionId": "WS-261109-PRC4",
+    "submittedAt": "2026-11-09T21:59:06+05:30"
+  },
+  "bride": {
+    "name": "Dr. Varsha M",
+    "shortName": "",
+    "father": {
+      "name": "Mohanan NR",
+      "late": false
+    },
+    "mother": {
+      "name": "Ambika Mohanan",
+      "late": false
+    }
+  },
+  "groom": {
+    "name": "Dheeraj Ep",
+    "shortName": "",
+    "father": {
+      "name": "Ramachandran E",
+      "late": false
+    },
+    "mother": {
+      "name": "Prasanna Kumari A",
+      "late": false
+    }
+  },
+  "invite": {
+    "text": ""
+  },
+  "wedding": {
+    "date": "2027-01-24",
+    "time": "10:00",
+    "venue": {
+      "name": "Sanskrit Convention Centre Pazhayannur",
+      "address": "",
+      "mapUrl": "https://maps.app.goo.gl/qAKnhAsdCMHcx5Lt7?g_st=ic"
+    }
+  },
+  "reception": {
+    "enabled": true,
+    "date": "2027-01-24",
+    "welcomeTime": "17:00",
+    "time": "17:30",
+    "venue": {
+      "name": "United Convention Centre Lakkidi",
+      "address": "",
+      "mapUrl": "https://maps.app.goo.gl/HLGPhuNQd1Esfksc7?g_st=ic"
+    }
+  },
+  "schedule": [],
+  "dressCode": "",
+  "gift": {
+    "enabled": false,
+    "bride": {
+      "name": "",
+      "upi": ""
+    },
+    "groom": {
+      "name": "",
+      "upi": ""
+    },
+    "message": ""
+  },
+  "guests": "",
+  "music": {
+    "preference": "https://youtu.be/vrQzJJ3tI7k?si=mO2HesDpUjqNdc-_",
+    "file": "/music/song.mp3",
+    "startAt": 40,
+    "title": "Ambalappuzhe Unnikkannanodu"
+  },
+  "photos": {
+    "hero": "/photos/1.jpeg",
+    "saveTheDate": "/photos/4.jpeg",
+    "background": [
+      "/photos/2.jpeg",
+      "/photos/3.jpeg",
+      "/photos/5.jpeg",
+      "/photos/6.jpeg"
+    ],
+    "gallery": [
+      "/photos/1.jpeg",
+      "/photos/2.jpeg",
+      "/photos/3.jpeg",
+      "/photos/4.jpeg",
+      "/photos/5.jpeg",
+      "/photos/6.jpeg"
+    ],
+    "reel": [
+      {
+        "src": "/photos/1.jpeg",
+        "motion": "in",
+        "focus": "50% 30%",
+        "caption": "Two hearts",
+        "status": true
+      },
+      {
+        "src": "/photos/5.jpeg",
+        "motion": "out",
+        "focus": "50% 40%",
+        "caption": "One journey"
+      },
+      {
+        "src": "/photos/2.jpeg",
+        "motion": "up",
+        "focus": "50% 40%",
+        "caption": "Our story begins"
+      },
+      {
+        "src": "/photos/6.jpeg",
+        "motion": "top",
+        "focus": "50% 15%",
+        "caption": "Together is a beautiful place to be"
+      },
+      {
+        "src": "/photos/4.jpeg",
+        "motion": "in",
+        "focus": "50% 40%",
+        "caption": "Save the date",
+        "status": true
+      }
+    ]
+  },
+  "videos": [
+    {
+      "src": "/videos/invitation-reel.mp4",
+      "label": "Invitation reel"
+    },
+    {
+      "src": "/videos/whatsapp-status.mp4",
+      "label": "WhatsApp status"
+    }
+  ]
+}
