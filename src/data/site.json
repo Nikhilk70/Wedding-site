@@ -11,7 +11,7 @@
       "late": false
     },
     "mother": {
-      "name": "Ambika Mohanan",
+      "name": "Ambika S",
       "late": false
     }
   },
@@ -34,7 +34,7 @@
     "date": "2027-01-24",
     "time": "10:00",
     "venue": {
-      "name": "Sanskrit Convention Centre Pazhayannur",
+      "name": "Samskriti Convention Centre, Pazhayannur",
       "address": "",
       "mapUrl": "https://maps.app.goo.gl/qAKnhAsdCMHcx5Lt7?g_st=ic"
     }
@@ -132,5 +132,26 @@
       "src": "/videos/whatsapp-status.mp4",
       "label": "WhatsApp status"
     }
-  ]
+  ],
+  "thanks": {
+    "title": "With Love & Gratitude",
+    "message": "Our heartfelt thanks to our families, whose love and blessings made this day possible.",
+    "bride": {
+      "label": "Bride's Family",
+      "members": [
+        "Manushankar",
+        "Reshma",
+        "Evaan"
+      ]
+    },
+    "groom": {
+      "label": "Groom's Family",
+      "members": [
+        "Mrithyujayan",
+        "Deepthi",
+        "Dakshit",
+        "Diva"
+      ]
+    }
+  }
 }
