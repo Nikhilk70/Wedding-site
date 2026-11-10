@@ -72,53 +72,55 @@
     "title": "Ambalappuzhe Unnikkannanodu"
   },
   "photos": {
-    "hero": "/photos/1.jpeg",
-    "saveTheDate": "/photos/4.jpeg",
+    "hero": "/photos/2.jpeg",
+    "main": "/photos/5.jpeg",
+    "saveTheDate": "/photos/2.jpeg",
     "background": [
-      "/photos/2.jpeg",
-      "/photos/3.jpeg",
+      "/photos/6.jpeg",
+      "/photos/7.jpeg",
       "/photos/5.jpeg",
-      "/photos/6.jpeg"
+      "/photos/2.jpeg"
     ],
     "gallery": [
-      "/photos/1.jpeg",
-      "/photos/2.jpeg",
-      "/photos/3.jpeg",
-      "/photos/4.jpeg",
       "/photos/5.jpeg",
-      "/photos/6.jpeg"
+      "/photos/2.jpeg",
+      "/photos/7.jpeg",
+      "/photos/6.jpeg",
+      "/photos/1.jpeg",
+      "/photos/4.jpeg",
+      "/photos/3.jpeg"
     ],
     "reel": [
       {
-        "src": "/photos/1.jpeg",
-        "motion": "in",
-        "focus": "50% 30%",
+        "src": "/photos/5.jpeg",
+        "motion": "left",
+        "focus": "50% 40%",
         "caption": "Two hearts",
         "status": true
       },
       {
-        "src": "/photos/5.jpeg",
-        "motion": "out",
-        "focus": "50% 40%",
+        "src": "/photos/2.jpeg",
+        "motion": "in",
+        "focus": "50% 25%",
         "caption": "One journey"
       },
       {
-        "src": "/photos/2.jpeg",
+        "src": "/photos/6.jpeg",
         "motion": "up",
-        "focus": "50% 40%",
-        "caption": "Our story begins"
+        "focus": "50% 30%",
+        "caption": "Blessed by tradition"
       },
       {
-        "src": "/photos/6.jpeg",
-        "motion": "top",
-        "focus": "50% 15%",
+        "src": "/photos/7.jpeg",
+        "motion": "right",
+        "focus": "60% 40%",
         "caption": "Together is a beautiful place to be"
       },
       {
-        "src": "/photos/4.jpeg",
-        "motion": "in",
-        "focus": "50% 40%",
-        "caption": "Save the date",
+        "src": "/photos/1.jpeg",
+        "motion": "out",
+        "focus": "50% 30%",
+        "caption": "Our story begins",
         "status": true
       }
     ]
@@ -152,6 +154,16 @@
         "Dakshit",
         "Diva"
       ]
+    }
+  },
+  "media": {
+    "main": {
+      "src": "/videos/main.mp4",
+      "poster": "/videos/main.jpg"
+    },
+    "story": {
+      "src": "/videos/story.mp4",
+      "poster": "/videos/story.jpg"
     }
   }
 }

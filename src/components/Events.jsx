@@ -1,3 +1,4 @@
+import { Nilavilakku } from './Decor.jsx';
 import { googleCalendarUrl, icsDataUrl, longDate, time12 } from '../lib/format.js';
 
 const pin = (
@@ -17,7 +18,7 @@ function EventCard({ icon, title, ml, date, rows, venue, calendar, delay }) {
 
   return (
     <article className="event reveal" style={{ '--d': delay }}>
-      <div className={`event__icon ${icon === '🪔' ? 'flicker' : 'twinkle'}`} aria-hidden="true">{icon}</div>
+      <div className={`event__icon ${icon === '🪔' ? '' : 'twinkle'}`} aria-hidden="true">{icon === '🪔' ? <Nilavilakku size={36} /> : icon}</div>
       <h3 className="event__title">{title}</h3>
       <p className="event__ml" lang="ml">{ml}</p>
       <p className="event__date">{longDate(date)}</p>
@@ -67,7 +68,7 @@ export default function Events({ site, names }) {
           )}
           {reception.enabled && reception.date && (
             <EventCard
-              icon="✨"
+              icon="❀"
               title="Reception"
               ml="സ്വീകരണം"
               date={reception.date}

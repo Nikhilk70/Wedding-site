@@ -20,6 +20,7 @@ import Reel from './components/Reel.jsx';
 import ThankYou from './components/ThankYou.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import { Divider, TapSparkles, useParallax } from './components/Effects.jsx';
+import { KasavuBand } from './components/Decor.jsx';
 
 const guestFromUrl = () => {
   try { return new URLSearchParams(window.location.search).get('to')?.trim().slice(0, 80) || ''; }
@@ -110,7 +111,6 @@ export default function App() {
           names={names}
           guest={guest}
           date={site.wedding?.date}
-          background={site.photos?.saveTheDate}
           onOpen={() => { startMusic(); setOpened(true); }}
         />
       )}
@@ -118,14 +118,14 @@ export default function App() {
       <main className={`page ${opened ? 'is-open' : ''}`} aria-hidden={!opened}>
         <Hero site={site} names={names} />
         <Invitation site={site} guest={guest} />
-        <Divider />
+        <KasavuBand />
         <Countdown site={site} />
         <Events site={site} names={names} />
         <Divider />
         <Reel site={site} names={names} />
         <SaveTheDate site={site} names={names} />
         <Schedule site={site} />
-        <Divider />
+        <KasavuBand />
         <Gallery photos={site.photos?.gallery || []} />
         <Gift gift={site.gift} />
         <Rsvp />

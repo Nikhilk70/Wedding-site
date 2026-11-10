@@ -1,3 +1,4 @@
+import { Nilavilakku } from './Decor.jsx';
 const parentName = (p) => (p?.name ? `${p.late ? 'Late ' : ''}${p.name}` : '');
 
 function Parents({ label, father, mother }) {
@@ -18,9 +19,19 @@ export default function Invitation({ site, guest }) {
   return (
     <section className="section invitation" id="invitation">
       <div className="container narrow">
-        <p className="ganesha reveal" aria-hidden="true">ॐ</p>
+        <div className="invocation reveal" aria-hidden="true">
+          <Nilavilakku size={30} />
+          <span className="ganesha">ॐ</span>
+          <Nilavilakku size={30} />
+        </div>
         <p className="eyebrow reveal">{guest ? `Dear ${guest},` : 'With the blessings of the Almighty'}</p>
         <p className="lead reveal" style={{ '--d': '.1s' }}>{text}</p>
+
+        {site.photos?.main && (
+          <figure className="temple-frame reveal zoom">
+            <img src={site.photos.main} alt="" loading="lazy" />
+          </figure>
+        )}
 
         <div className="families">
           <div className="family reveal from-left">

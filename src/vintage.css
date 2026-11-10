@@ -1,0 +1,270 @@
+/* ==========================================================================
+   v3 — Vintage Kerala Hindu wedding theme
+   kasavu cream + temple gold, mural green & kumkum red, brass nilavilakku,
+   mango-leaf thoranam, jasmine strings, floating flowers & bokeh, film grain.
+   Loaded last: overrides styles.css / mobile.css where needed.
+   ========================================================================== */
+:root {
+  --cream: #f6eedb;
+  --ivory: #fffaf0;
+  --paper: #efe2c4;
+  --gold: #a87a22;
+  --gold-2: #d4ab55;
+  --gold-3: #f0d898;
+  --plum: #2f5a3b;      /* mural / blouse green (replaces purple accents) */
+  --plum-2: #8c2f22;    /* kumkum red */
+  --ink: #3a2614;
+  --muted: #6f5a43;
+  --line: rgba(168, 122, 34, .38);
+  --shadow: 0 20px 50px -22px rgba(70, 40, 10, .45);
+  --display: 'Cinzel', 'Cormorant Garamond', serif;
+  --ml: 'Noto Serif Malayalam', 'Manjari', serif;
+}
+
+/* aged paper everywhere */
+body {
+  background-color: var(--cream);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .32 0 0 0 0 .15 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.eyebrow { font-family: var(--display); font-weight: 600; letter-spacing: .26em; color: var(--plum-2); }
+.page { opacity: 1; }                     /* hero video shows behind the opening card */
+.page:not(.is-open) > :not(.hero) { visibility: hidden; }
+
+/* ---------- Floating flowers + bokeh (replaces the simple petals) ---------- */
+.bg__photo { filter: blur(16px) sepia(.45) saturate(.85); }
+.bg__photo.is-active { opacity: .26; }
+.bg__veil {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 245, 220, .55), transparent 60%),
+    radial-gradient(ellipse at 50% 120%, rgba(120, 70, 20, .18), transparent 60%),
+    linear-gradient(180deg, rgba(246, 238, 219, .82), rgba(239, 226, 196, .9));
+}
+.bg__bokeh { position: absolute; inset: 0; }
+.bg__bokeh span {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 223, 140, .55), rgba(255, 200, 90, .12) 55%, transparent 70%);
+  animation: bokeh ease-in-out infinite alternate;
+}
+.flower {
+  position: absolute; top: -40px;
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+  will-change: transform;
+}
+.flower i { display: block; width: 100%; height: 100%; animation: tumble 7s linear infinite; }
+.flower svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 2px 2px rgba(90, 50, 10, .18)); }
+.flower--leaf i { animation-duration: 9s; }
+.flower--petal { opacity: .85; }
+
+/* ---------- Opening card over the video ---------- */
+.envelope {
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(30, 16, 6, .05), rgba(30, 16, 6, .55) 80%),
+    linear-gradient(180deg, rgba(40, 22, 8, .25), rgba(40, 22, 8, .45));
+  transition: opacity 1s ease .7s, visibility 0s linear 1.8s;
+}
+.envelope__card {
+  width: min(380px, 100%);
+  padding: 34px 24px 30px;
+  border-radius: 14px 14px 14px 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 238, .93), rgba(246, 234, 206, .93));
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, .6),
+    inset 0 0 0 6px rgba(255, 250, 238, .9),
+    inset 0 0 0 7px var(--gold-2),
+    inset 0 0 0 10px rgba(255, 250, 238, .9),
+    inset 0 0 0 11px var(--gold);
+  animation: card-in 1.2s var(--ease) .3s both;
+}
+.envelope__flap { display: none; }
+.envelope.is-opening .envelope__card { transform: translateY(-40px) scale(1.08) rotateX(12deg); opacity: 0; transition: transform 1.1s var(--ease), opacity .9s ease .2s; }
+.envelope__corner { position: absolute; width: 34px; height: 34px; border: 2px solid var(--gold); z-index: 2; }
+.envelope__corner::after { content: '❀'; position: absolute; font-size: 12px; color: var(--plum-2); }
+.envelope__corner--tl { top: 16px; left: 16px; border-right: 0; border-bottom: 0; border-top-left-radius: 10px; }
+.envelope__corner--tr { top: 16px; right: 16px; border-left: 0; border-bottom: 0; border-top-right-radius: 10px; }
+.envelope__corner--bl { bottom: 16px; left: 16px; border-right: 0; border-top: 0; border-bottom-left-radius: 10px; }
+.envelope__corner--br { bottom: 16px; right: 16px; border-left: 0; border-top: 0; border-bottom-right-radius: 10px; }
+.envelope__corner--tl::after { left: 6px; top: 4px; } .envelope__corner--tr::after { right: 6px; top: 4px; }
+.envelope__corner--bl::after { left: 6px; bottom: 4px; } .envelope__corner--br::after { right: 6px; bottom: 4px; }
+.envelope__lamp { margin: 0 auto 4px; display: block; }
+.envelope__ml { font: 700 22px/1.4 var(--ml); color: var(--plum-2); margin: 0 0 6px; letter-spacing: .04em; }
+.envelope__names { font-size: clamp(44px, 12vw, 60px); }
+.envelope__names .amp { color: var(--plum-2); }
+.envelope__guest strong { font-family: var(--display); font-size: 18px; letter-spacing: .06em; }
+.seal { background: radial-gradient(circle at 35% 30%, #b8432f, #8c2f22 55%, #5e1c12); }
+
+/* ---------- Hero: full-screen slow-motion video ---------- */
+.hero { min-height: 100svh; padding: 0; align-items: end; overflow: hidden; background: #2a1a0c; }
+.hero__bg, .hero__full { display: none !important; }
+.hero__media { position: absolute; inset: 0; }
+.hero__video {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 30%;
+  background: center / cover no-repeat;
+  filter: sepia(.18) saturate(1.05) contrast(1.03);
+}
+.hero__sepia {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 35%, transparent 40%, rgba(35, 18, 5, .55) 100%),
+    linear-gradient(180deg, rgba(40, 20, 5, .35) 0%, transparent 25%, transparent 45%, rgba(35, 18, 5, .55) 70%, rgba(30, 15, 4, .88) 100%);
+}
+.hero__grain {
+  position: absolute; inset: -50%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='.5'/%3E%3C/svg%3E");
+  opacity: .12; mix-blend-mode: overlay;
+  animation: grain 1s steps(6) infinite;
+  pointer-events: none;
+}
+.hero__content { position: relative; z-index: 3; width: 100%; padding: 0 20px calc(120px + env(safe-area-inset-bottom)); }
+.hero__text { color: #fff; }
+.hero__shubha { font: 700 20px var(--ml); color: var(--gold-3); margin: 0 0 4px; letter-spacing: .05em; text-shadow: 0 2px 10px rgba(0, 0, 0, .5); }
+.hero .eyebrow { color: var(--gold-3); }
+.hero__names { color: #fff; text-shadow: 0 4px 26px rgba(0, 0, 0, .45); flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 0 .2em; font-size: clamp(64px, 19vw, 110px); }
+.hero__names .amp { color: var(--gold-3); margin: 0; }
+.hero__date { color: #fff; }
+.hero__sub { color: var(--gold-3); }
+.hero .ornament { color: var(--gold-3); }
+.hero .ornament::before, .hero .ornament::after { background: linear-gradient(90deg, transparent, var(--gold-3)); }
+.hero__band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; }
+.scroll-cue { z-index: 4; border-color: var(--gold-3); bottom: calc(36px + env(safe-area-inset-bottom)); }
+.scroll-cue span { background: var(--gold-3); }
+
+@media (min-width: 860px) {
+  .hero { align-items: center; }
+  .hero__video { filter: blur(22px) sepia(.35) brightness(.7); transform: scale(1.15); }
+  .hero__content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; justify-items: center; width: min(1100px, 100% - 32px); padding: 120px 0; }
+  .arch { display: block; width: min(360px, 34vw); box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .6), 0 0 0 8px rgba(255, 250, 238, .9), 0 0 0 9px var(--gold-2), 0 0 0 16px rgba(255, 250, 238, .35); }
+  .arch__video { width: 100%; height: 100%; object-fit: cover; }
+}
+
+/* ---------- Mango-leaf thoranam with marigolds & bells ---------- */
+.thoranam { position: absolute; z-index: 4; top: 0; left: -2%; right: -2%; height: 80px; pointer-events: none; }
+.envelope .thoranam { z-index: 1; }
+.thoranam__rope { position: absolute; inset: 0 0 auto; width: 100%; height: 40px; overflow: visible; }
+.thoranam__rope path { fill: none; stroke: #8a5a1c; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.thoranam__item { position: absolute; transform-origin: 50% 0; animation: leafsway 3.2s ease-in-out infinite alternate; }
+.thoranam__leaf {
+  display: block; width: 15px; height: 46px; margin-left: -7px;
+  background: linear-gradient(90deg, #3d6b2c, #5f8f3e 45%, #79a650 55%, #3d6b2c);
+  border-radius: 50% 50% 50% 50% / 12% 12% 88% 88%;
+  box-shadow: inset 0 0 0 .5px rgba(0, 0, 0, .15), 0 3px 4px rgba(0, 0, 0, .25);
+}
+.thoranam__marigold {
+  position: absolute; left: -9px; top: -6px; width: 18px; height: 18px; border-radius: 50%;
+  background: radial-gradient(circle, #c0560e 22%, #f39c12 24% 55%, #f7b733 57% 72%, transparent 74%),
+              repeating-conic-gradient(#f39c12 0 15deg, #f7b733 15deg 30deg);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+.bell { position: absolute; top: 2px; width: 2px; height: 40px; background: #8a5a1c; transform-origin: 50% 0; animation: bellswing 2.6s ease-in-out infinite alternate; }
+.bell--l { left: 6%; } .bell--r { right: 6%; animation-delay: -1.3s; }
+.bell i {
+  position: absolute; left: -11px; bottom: -22px; width: 24px; height: 26px;
+  background: linear-gradient(90deg, #7a5412, #e9c46a 40%, #fff1c1 55%, #c8962e 75%, #6e4a10);
+  border-radius: 50% 50% 18% 18% / 70% 70% 20% 20%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .35);
+}
+.bell i::after { content: ''; position: absolute; left: 9px; bottom: -5px; width: 7px; height: 7px; border-radius: 50%; background: #a8781e; }
+
+/* ---------- Jasmine (mulla poo) strings ---------- */
+.jasmine { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.jasmine__str {
+  position: absolute; top: 30px; width: 12px; height: 46%;
+  background-image: radial-gradient(circle at 50% 50%, #fffef6 0 3.4px, #efe4c6 3.6px 4.4px, transparent 4.6px);
+  background-size: 12px 11px;
+  transform-origin: 50% 0;
+  animation: jasminesway 4.5s ease-in-out infinite alternate;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .3));
+}
+.jasmine__str b { position: absolute; left: -3px; bottom: -14px; width: 18px; height: 18px; border-radius: 50%; background: radial-gradient(circle, #c0392b 30%, #e74c3c 32% 60%, transparent 62%); }
+.jasmine__str--l1 { left: 3%; height: 40%; }
+.jasmine__str--l2 { left: 9%; height: 28%; animation-delay: -1.5s; }
+.jasmine__str--r1 { right: 3%; height: 40%; animation-delay: -.8s; }
+.jasmine__str--r2 { right: 9%; height: 28%; animation-delay: -2.2s; }
+
+/* ---------- Kasavu band ---------- */
+.kasavu { height: 26px; background: var(--ivory); position: relative; }
+.kasavu span, .kasavu::before {
+  position: absolute; left: 0; right: 0; content: '';
+}
+.kasavu::before { top: 5px; height: 5px; background: linear-gradient(90deg, #b8862b, #f3d98a, #b8862b, #f3d98a, #b8862b); background-size: 300% 100%; animation: kasavushine 8s linear infinite; }
+.kasavu span { top: 14px; height: 2px; background: linear-gradient(90deg, #b8862b, #f3d98a, #b8862b); }
+.kasavu span::after { content: ''; position: absolute; left: 0; right: 0; top: 5px; height: 2px; background: repeating-linear-gradient(90deg, #b8862b 0 10px, transparent 10px 16px); }
+main > .kasavu { margin: 8px 0; box-shadow: 0 1px 0 var(--line), 0 -1px 0 var(--line); }
+
+/* ---------- Brass lamp ---------- */
+.lamp { overflow: visible; }
+.lamp__flame { animation: flame 1.6s ease-in-out infinite; }
+.lamp__glow { animation: lampglow 2.4s ease-in-out infinite; transform-origin: 40px 22px; }
+.invocation { display: flex; align-items: flex-end; justify-content: center; gap: 22px; margin-bottom: 12px; }
+.invocation .ganesha { font-size: 40px; color: var(--plum-2); line-height: 1; margin: 0 0 18px; }
+.event__icon .lamp { margin: 0 auto; }
+
+/* ---------- Temple-arch photo frame ---------- */
+.temple-frame {
+  position: relative; margin: 34px auto 10px; width: min(520px, 100%);
+  aspect-ratio: 4 / 3.3;
+  border-radius: 999px 999px 14px 14px / 70% 70% 14px 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow), 0 0 0 7px var(--ivory), 0 0 0 8px var(--gold-2), 0 0 0 14px var(--ivory), 0 0 0 15px var(--gold);
+}
+.temple-frame img { width: 100%; height: 100%; object-fit: cover; object-position: 55% 40%; filter: sepia(.12) saturate(1.05); animation: slowzoom 20s ease-in-out infinite alternate; }
+.temple-frame::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, transparent 35%, rgba(255, 240, 200, .45) 50%, transparent 65%); transform: translateX(-120%); animation: shine 7s ease-in-out 1.5s infinite; }
+
+/* ---------- Save-the-date video frame ---------- */
+.save__frame { padding: 10px; border-radius: 12px; box-shadow: var(--shadow), inset 0 0 0 2px var(--gold-2); background: linear-gradient(160deg, var(--ivory), var(--paper)); }
+.save__video { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 75%; border-radius: 6px; filter: sepia(.12); }
+
+/* ---------- Vintage touches on existing sections ---------- */
+.family { background: rgba(255, 250, 238, .8); box-shadow: inset 0 -4px 0 -1px var(--gold-3); }
+.family__name { color: var(--plum); font-family: var(--display); font-weight: 600; font-size: clamp(22px, 3.4vw, 28px); letter-spacing: .03em; }
+.event { background: linear-gradient(180deg, var(--ivory), #f8efda); }
+.event::after { content: ''; position: absolute; left: 22px; right: 22px; bottom: 12px; height: 4px; border-top: 2px solid var(--gold-2); border-bottom: 1px solid var(--gold-2); }
+.event__title { font-family: var(--script); }
+.countdown__unit, .calendar, .upi, .wish, .thanks__side { background: rgba(255, 250, 238, .86); }
+.countdown__unit { box-shadow: var(--shadow), inset 0 -3px 0 var(--gold-3); }
+.calendar__day.is-wedding svg { fill: var(--plum-2); }
+.gallery__item img { filter: sepia(.1) saturate(1.03); }
+.gallery__item:hover img { filter: none; }
+.timeline__dot { border-color: var(--plum-2); }
+.btn { background: linear-gradient(135deg, #9a6d1c, #c99a43 55%, #9a6d1c); background-size: 200% 100%; }
+.bottomnav a.is-active { color: var(--plum-2); background: rgba(212, 171, 85, .25); }
+.music { color: var(--plum-2); }
+.footer { background: linear-gradient(180deg, transparent, rgba(140, 47, 34, .08)); }
+.thanks__card { box-shadow: var(--shadow), inset 0 0 0 8px var(--ivory), inset 0 0 0 9px var(--gold-2), inset 0 0 0 13px var(--ivory), inset 0 0 0 14px var(--gold); }
+
+/* ---------- keyframes ---------- */
+@keyframes card-in { from { opacity: 0; transform: translateY(30px) scale(.94); } to { opacity: 1; transform: none; } }
+@keyframes tumble { from { transform: rotate3d(1, .6, .3, 0deg); } to { transform: rotate3d(1, .6, .3, 360deg); } }
+@keyframes bokeh { from { transform: translate(0, 0) scale(.8); opacity: .25; } to { transform: translate(18px, -26px) scale(1.15); opacity: .8; } }
+@keyframes leafsway { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+@keyframes bellswing { from { transform: rotate(-10deg); } to { transform: rotate(10deg); } }
+@keyframes jasminesway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes flame {
+  0%, 100% { transform: scale(1, 1) skewX(0); opacity: 1; }
+  25% { transform: scale(.92, 1.1) skewX(3deg); }
+  50% { transform: scale(1.05, .92) skewX(-2deg); opacity: .9; }
+  75% { transform: scale(.96, 1.06) skewX(2deg); }
+}
+@keyframes lampglow { 0%, 100% { opacity: .7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.12); } }
+@keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-5%, 3%); } 40% { transform: translate(4%, -4%); } 60% { transform: translate(-3%, -2%); } 80% { transform: translate(5%, 4%); } 100% { transform: translate(0, 0); } }
+@keyframes kasavushine { to { background-position: 300% 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .flower, .bg__bokeh, .hero__grain { display: none; }
+  .thoranam__item, .bell, .jasmine__str, .lamp__flame { animation: none; }
+}
+
+/* fixes after browser review */
+.kasavu.hero__band { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; opacity: .92; }
+@media (max-width: 600px) {
+  .jasmine__str--l2, .jasmine__str--r2 { display: none; }
+  .jasmine__str--l1 { left: 2%; height: 24%; }
+  .jasmine__str--r1 { right: 2%; height: 24%; }
+  .hero__content { padding-bottom: calc(108px + env(safe-area-inset-bottom)); }
+}
