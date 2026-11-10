@@ -1,4 +1,5 @@
 import { Nilavilakku } from './Decor.jsx';
+import MotionFrame from './MotionFrame.jsx';
 const parentName = (p) => (p?.name ? `${p.late ? 'Late ' : ''}${p.name}` : '');
 
 function Parents({ label, father, mother }) {
@@ -27,11 +28,7 @@ export default function Invitation({ site, guest }) {
         <p className="eyebrow reveal">{guest ? `Dear ${guest},` : 'With the blessings of the Almighty'}</p>
         <p className="lead reveal" style={{ '--d': '.1s' }}>{text}</p>
 
-        {site.photos?.main && (
-          <figure className="temple-frame reveal zoom">
-            <img src={site.photos.main} alt="" loading="lazy" />
-          </figure>
-        )}
+        <MotionFrame src={site.frames?.invitation || site.photos?.main} shape="arch" ratio="4 / 3.3" tilt={0} motion="in" focus="55% 40%" />
 
         <div className="families">
           <div className="family reveal from-left">

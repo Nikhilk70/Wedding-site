@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { dateParts, istInstant } from '../lib/format.js';
+import MotionFrame from './MotionFrame.jsx';
 
 function diff(target) {
   const ms = Math.max(0, target - Date.now());
@@ -47,7 +48,9 @@ export default function Countdown({ site }) {
 
   return (
     <section className="section countdown" id="countdown">
-      <div className="container">
+      <div className="container split">
+        <MotionFrame src={site.frames?.countdown} motion="left" tilt={-2} focus="60% 40%" />
+        <div className="split__body">
         <p className="eyebrow reveal">Counting down to forever</p>
         <h2 className="section__title script reveal">The Big Day</h2>
         {left.done ? (
@@ -63,6 +66,7 @@ export default function Countdown({ site }) {
           </div>
         )}
         <MonthCalendar iso={site.wedding?.date} />
+        </div>
       </div>
     </section>
   );

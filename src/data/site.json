@@ -165,5 +165,10 @@
       "src": "/videos/story.mp4",
       "poster": "/videos/story.jpg"
     }
+  },
+  "frames": {
+    "invitation": "/photos/5.jpeg",
+    "countdown": "/photos/7.jpeg",
+    "thanks": "/photos/6.jpeg"
   }
 }

@@ -1,3 +1,4 @@
+import MotionFrame from './MotionFrame.jsx';
 import { useEffect, useRef, useState } from 'react';
 
 const parentName = (p) => (p?.name ? `${p.late ? 'Late ' : ''}${p.name}` : '');
@@ -45,6 +46,7 @@ export default function ThankYou({ site, names }) {
   return (
     <section className="section thanks" id="thanks">
       <div className="container narrow">
+        <MotionFrame src={site.frames?.thanks} motion="up" tilt={2} focus="50% 25%" className="thanks__frame" />
         <div ref={ref} className={`thanks__card ${open ? 'is-open' : ''}`}>
           <div className="thanks__hearts" aria-hidden="true">
             {Array.from({ length: 12 }, (_, i) => (

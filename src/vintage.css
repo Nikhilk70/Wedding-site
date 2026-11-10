@@ -272,3 +272,77 @@ main > .kasavu { margin: 8px 0; box-shadow: 0 1px 0 var(--line), 0 -1px 0 var(--
 /* gallery videos */
 .gallery__item video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .lightbox__video { max-width: min(92vw, 520px); max-height: 84vh; border-radius: 6px; box-shadow: 0 20px 60px rgba(0, 0, 0, .5); animation: pop .4s var(--ease); }
+
+/* ---------- Motion frames (save-the-date style, reused) ---------- */
+.mframe {
+  margin: 0 auto; width: min(420px, 86vw);
+  padding: 10px; border-radius: 12px;
+  background: linear-gradient(160deg, var(--ivory), var(--paper));
+  box-shadow: var(--shadow), inset 0 0 0 2px var(--gold-2);
+  transform: rotate(var(--tilt));
+  transition: transform .7s var(--ease);
+}
+.mframe.reveal.is-visible { transform: rotate(var(--tilt)); }
+.mframe:hover, .mframe.reveal.is-visible:hover { transform: rotate(0) scale(1.02); }
+.mframe__window { position: relative; overflow: hidden; border-radius: 6px; aspect-ratio: var(--ratio); background: #2a1a0c; }
+.mframe__media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.12) saturate(1.04); }
+.mframe--arch { width: min(520px, 100%); margin-top: 34px; margin-bottom: 10px; padding: 0; background: none; box-shadow: none; }
+.mframe--arch .mframe__window {
+  border-radius: 999px 999px 14px 14px / 70% 70% 14px 14px;
+  box-shadow: var(--shadow), 0 0 0 7px var(--ivory), 0 0 0 8px var(--gold-2), 0 0 0 14px var(--ivory), 0 0 0 15px var(--gold);
+}
+
+/* cinematic slow zoom / pan on photos (feels like slow-motion footage) */
+.mkb { animation: 16s ease-in-out infinite alternate; will-change: transform; }
+.mkb--in { animation-name: mkb-in; }
+.mkb--out { animation-name: mkb-out; }
+.mkb--left { animation-name: mkb-left; }
+.mkb--right { animation-name: mkb-right; }
+.mkb--up { animation-name: mkb-up; }
+
+/* warm sunlight drifting across */
+.mframe__sun {
+  position: absolute; inset: -30%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 214, 140, .45), transparent 45%);
+  mix-blend-mode: screen;
+  animation: sundrift 11s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+/* petals falling inside the frame */
+.mframe__petals { position: absolute; inset: 0; pointer-events: none; }
+.mframe__petals i {
+  position: absolute; top: -16px; left: var(--x);
+  width: calc(11px * var(--s)); height: calc(14px * var(--s));
+  border-radius: 80% 0 80% 0;
+  background: radial-gradient(circle at 30% 30%, #ffd6df, #d9536f 70%);
+  opacity: 0;
+  animation: framepetal var(--t) linear var(--d) infinite;
+}
+.mframe__petals i:nth-child(3n) { background: radial-gradient(circle at 30% 30%, #fffef6, #efe2c4 75%); border-radius: 50% 50% 50% 0; }
+.mframe__petals i:nth-child(4n) { background: radial-gradient(circle at 30% 30%, #ffe08a, #f39c12 75%); border-radius: 50%; }
+
+/* side-by-side layout (frame + text), stacked on phones */
+.split { display: grid; gap: 40px; align-items: center; }
+.split .mframe { margin-bottom: 6px; }
+@media (min-width: 860px) {
+  .split { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .split .mframe { width: min(400px, 100%); }
+}
+.thanks__frame { margin-bottom: 30px; width: min(340px, 80vw); }
+
+@keyframes mkb-in { from { transform: scale(1.02); } to { transform: scale(1.16) translate(-1.5%, -1%); } }
+@keyframes mkb-out { from { transform: scale(1.18) translate(1%, -1%); } to { transform: scale(1.03); } }
+@keyframes mkb-left { from { transform: scale(1.15) translateX(4%); } to { transform: scale(1.15) translateX(-4%); } }
+@keyframes mkb-right { from { transform: scale(1.15) translateX(-4%); } to { transform: scale(1.15) translateX(4%); } }
+@keyframes mkb-up { from { transform: scale(1.14) translateY(4%); } to { transform: scale(1.14) translateY(-3%); } }
+@keyframes sundrift { from { transform: translate(-10%, -8%); opacity: .55; } to { transform: translate(18%, 12%); opacity: 1; } }
+@keyframes framepetal {
+  0% { opacity: 0; top: -16px; transform: translateX(0) rotate(0); }
+  10% { opacity: .9; }
+  50% { transform: translateX(18px) rotate(160deg); }
+  90% { opacity: .85; }
+  100% { opacity: 0; top: 104%; transform: translateX(-10px) rotate(320deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mkb, .mframe__sun, .mframe__petals i { animation: none; }
+}
