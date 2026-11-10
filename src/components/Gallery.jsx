@@ -1,4 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { LoopVideo } from './Hero.jsx';
+
+const isVideo = (src) => /\.(mp4|webm)$/i.test(src);
+const asMedia = (src) => ({ src, poster: src.replace(/\.(mp4|webm)$/i, '.jpg') });
 
 export default function Gallery({ photos }) {
   const [open, setOpen] = useState(-1);
@@ -37,7 +41,7 @@ export default function Gallery({ photos }) {
               onClick={() => setOpen(i)}
               aria-label={`Open photo ${i + 1}`}
             >
-              <img src={src} alt="" loading="lazy" />
+              {isVideo(src) ? <LoopVideo media={asMedia(src)} /> : <img src={src} alt="" loading="lazy" />}
             </button>
           ))}
         </div>
@@ -58,7 +62,9 @@ export default function Gallery({ photos }) {
             touchX.current = null;
           }}
         >
-          <img key={open} src={photos[open]} alt="" onClick={(e) => e.stopPropagation()} />
+          {isVideo(photos[open])
+            ? <LoopVideo key={open} media={asMedia(photos[open])} className="lightbox__video" onClick={(e) => e.stopPropagation()} />
+            : <img key={open} src={photos[open]} alt="" onClick={(e) => e.stopPropagation()} />}
           <button className="lightbox__btn lightbox__close" onClick={close} aria-label="Close">×</button>
           <button className="lightbox__btn lightbox__prev" onClick={(e) => { e.stopPropagation(); step(-1); }} aria-label="Previous">‹</button>
           <button className="lightbox__btn lightbox__next" onClick={(e) => { e.stopPropagation(); step(1); }} aria-label="Next">›</button>

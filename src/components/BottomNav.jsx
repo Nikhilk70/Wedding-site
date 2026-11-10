@@ -3,12 +3,12 @@ import { useEffect, useRef, useState } from 'react';
 const ICONS = {
   home: 'M12 3 3 10v11h6v-6h6v6h6V10z',
   events: 'M7 2v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7Zm-2 8h14v10H5V10Zm2 2v3h3v-3H7Z',
-  reel: 'M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm6 4v8l6-4-6-4Z',
+  wishes: 'M4 3h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H8l-4 4V4a1 1 0 0 1 1-1Zm4 5v2h8V8H8Zm0 4v2h5v-2H8Z',
   gallery: 'M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 0h7v7h-7v-7Z',
   rsvp: 'M12 21s-7.5-4.6-9.6-9.1C.9 8.6 3 5 6.6 5c2 0 3.5 1.1 4.4 2.5C11.9 6.1 13.4 5 15.4 5 19 5 21.1 8.6 19.6 11.9 17.5 16.4 12 21 12 21Z'
 };
 const ITEMS = [
-  ['home', 'Home'], ['events', 'Events'], ['reel', 'Reel'], ['gallery', 'Photos'], ['rsvp', 'RSVP']
+  ['home', 'Home'], ['events', 'Events'], ['gallery', 'Photos'], ['rsvp', 'RSVP'], ['wishes', 'Wishes']
 ];
 
 /** Mobile-only app-style navigation. Hides while scrolling down, returns when scrolling up. */

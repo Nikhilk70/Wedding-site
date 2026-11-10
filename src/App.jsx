@@ -16,7 +16,6 @@ import Rsvp from './components/Rsvp.jsx';
 import Wishes from './components/Wishes.jsx';
 import Gift from './components/Gift.jsx';
 import Footer from './components/Footer.jsx';
-import Reel from './components/Reel.jsx';
 import ThankYou from './components/ThankYou.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import { Divider, TapSparkles, useParallax } from './components/Effects.jsx';
@@ -122,7 +121,6 @@ export default function App() {
         <Countdown site={site} />
         <Events site={site} names={names} />
         <Divider />
-        <Reel site={site} names={names} />
         <SaveTheDate site={site} names={names} />
         <Schedule site={site} />
         <KasavuBand />
