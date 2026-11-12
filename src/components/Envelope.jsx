@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { dotDate } from '../lib/format.js';
 import { Burst } from './Effects.jsx';
 import { Nilavilakku } from './Decor.jsx';
+import { LoopVideo } from './Hero.jsx';
 
 /**
  * Opening screen: a vintage kasavu-bordered invitation card floating over the hero's
  * slow-motion video (the video plays behind this see-through overlay).
  */
-export default function Envelope({ names, guest, date, onOpen }) {
+export default function Envelope({ names, guest, date, media, onOpen }) {
   const [opening, setOpening] = useState(false);
 
   const open = () => {
@@ -18,7 +19,9 @@ export default function Envelope({ names, guest, date, onOpen }) {
   };
 
   return (
-    <div className={`envelope ${opening ? 'is-opening' : ''}`} role="dialog" aria-label="Wedding invitation">
+    <div className={`envelope ${media ? 'envelope--video' : ''} ${opening ? 'is-opening' : ''}`} role="dialog" aria-label="Wedding invitation">
+      {media && <div className="envelope__bg" style={{ backgroundImage: `url(${media.poster})` }} aria-hidden="true" />}
+      {media && <LoopVideo media={media} eager className="envelope__video" aria-hidden="true" />}
       <div className="envelope__card">
         <span className="envelope__corner envelope__corner--tl" aria-hidden="true" />
         <span className="envelope__corner envelope__corner--tr" aria-hidden="true" />

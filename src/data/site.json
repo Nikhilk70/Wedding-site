@@ -149,6 +149,10 @@
     }
   },
   "media": {
+    "opening": {
+      "src": "/videos/chapter-1.mp4",
+      "poster": "/videos/chapter-1.jpg"
+    },
     "hero": {
       "src": "/videos/hero.mp4",
       "poster": "/videos/hero.jpg"
@@ -156,10 +160,6 @@
     "save": {
       "src": "/videos/save.mp4",
       "poster": "/videos/save.jpg"
-    },
-    "chapter1": {
-      "src": "/videos/chapter-1.mp4",
-      "poster": "/videos/chapter-1.jpg"
     },
     "chapter2": {
       "src": "/videos/chapter-2.mp4",

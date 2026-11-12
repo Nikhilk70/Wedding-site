@@ -109,6 +109,7 @@ export default function App() {
       {!opened && (
         <Envelope
           names={names}
+          media={site.media?.opening}
           guest={guest}
           date={site.wedding?.date}
           onOpen={() => { startMusic(); setOpened(true); }}
@@ -123,7 +124,6 @@ export default function App() {
         <Events site={site} names={names} />
         <Divider />
         <SaveTheDate site={site} names={names} />
-        <Chapter id="chapter-1" media={site.media?.chapter1} title="Two souls, one journey" ml="രണ്ടു ഹൃദയങ്ങൾ, ഒരു യാത്ര" />
         <Schedule site={site} />
         <KasavuBand />
         <Gallery photos={site.photos?.gallery || []} />
