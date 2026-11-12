@@ -75,20 +75,12 @@
     "hero": "/photos/2.jpeg",
     "main": "/photos/5.jpeg",
     "saveTheDate": "/photos/2.jpeg",
-    "background": [
-      "/photos/6.jpeg",
-      "/photos/7.jpeg",
-      "/photos/5.jpeg",
-      "/photos/2.jpeg"
-    ],
+    "background": [],
     "gallery": [
-      "/photos/5.jpeg",
-      "/photos/2.jpeg",
-      "/photos/7.jpeg",
-      "/photos/6.jpeg",
-      "/photos/1.jpeg",
-      "/photos/4.jpeg",
-      "/photos/3.jpeg"
+      "/videos/gallery-1.mp4",
+      "/videos/gallery-2.mp4",
+      "/videos/gallery-3.mp4",
+      "/videos/gallery-4.mp4"
     ],
     "reel": [
       {
@@ -157,18 +149,26 @@
     }
   },
   "media": {
-    "main": {
-      "src": "/videos/main.mp4",
-      "poster": "/videos/main.jpg"
+    "hero": {
+      "src": "/videos/hero.mp4",
+      "poster": "/videos/hero.jpg"
     },
-    "story": {
-      "src": "/videos/story.mp4",
-      "poster": "/videos/story.jpg"
+    "save": {
+      "src": "/videos/save.mp4",
+      "poster": "/videos/save.jpg"
+    },
+    "chapter1": {
+      "src": "/videos/chapter-1.mp4",
+      "poster": "/videos/chapter-1.jpg"
+    },
+    "chapter2": {
+      "src": "/videos/chapter-2.mp4",
+      "poster": "/videos/chapter-2.jpg"
     }
   },
   "frames": {
-    "invitation": "/photos/5.jpeg",
-    "countdown": "/photos/7.jpeg",
-    "thanks": "/photos/6.jpeg"
+    "invitation": "/videos/invitation.mp4",
+    "countdown": "/videos/countdown.mp4",
+    "thanks": "/videos/thanks.mp4"
   }
 }

@@ -28,7 +28,7 @@ export default function Invitation({ site, guest }) {
         <p className="eyebrow reveal">{guest ? `Dear ${guest},` : 'With the blessings of the Almighty'}</p>
         <p className="lead reveal" style={{ '--d': '.1s' }}>{text}</p>
 
-        <MotionFrame src={site.frames?.invitation || site.photos?.main} shape="arch" ratio="4 / 3.3" tilt={0} motion="in" focus="55% 40%" />
+        <MotionFrame src={site.frames?.invitation || site.photos?.main} shape="arch" ratio="4 / 4.4" tilt={0} motion="in" focus="50% 62%" />
 
         <div className="families">
           <div className="family reveal from-left">

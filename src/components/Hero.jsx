@@ -2,30 +2,63 @@ import { useEffect, useRef, useState } from 'react';
 import { dotDate, longDate } from '../lib/format.js';
 import { JasmineStrings, KasavuBand, Thoranam } from './Decor.jsx';
 
-/** Muted, looping, inline background video that keeps playing on phones. */
-export function LoopVideo({ media, className = '', ...rest }) {
+/* Guests on data-saver or with "reduce motion" get the still poster instead of video. */
+const posterOnly = () =>
+  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData === true;
+
+/**
+ * Muted, looping, inline video tuned for phones (see docs on mobile video limits):
+ *  - eager (hero only): loads and plays immediately
+ *  - otherwise: no download until ~300px from the viewport; plays only while ≥50% visible;
+ *    pauses when it leaves; releases the decoder when far away; pauses when the tab is hidden
+ *  - autoplay blocked (iOS Low Power Mode)? the poster stays and the first tap retries
+ */
+export function LoopVideo({ media, className = '', eager = false, ...rest }) {
   const ref = useRef(null);
+  const [still] = useState(posterOnly);
+
   useEffect(() => {
     const v = ref.current;
-    if (!v) return undefined;
-    const tryPlay = () => v.play().catch(() => {});
-    tryPlay();
-    // iOS low-power mode / data saver may block autoplay; retry on first touch
-    window.addEventListener('pointerdown', tryPlay, { once: true });
-    return () => window.removeEventListener('pointerdown', tryPlay);
-  }, []);
+    if (!v || still || !media?.src) return undefined;
+    let visible = false;
+    const attach = () => { if (!v.getAttribute('src')) { v.src = media.src; v.load(); } };
+    const detach = () => { if (!eager && v.getAttribute('src')) { v.pause(); v.removeAttribute('src'); v.load(); } };
+    const play = () => { if (visible && !document.hidden) v.play().catch(() => {}); };
+
+    if (eager) { attach(); visible = true; play(); }
+
+    // load ahead of time when it is getting close
+    const near = new IntersectionObserver(([e]) => (e.isIntersecting ? attach() : detach()), { rootMargin: '1200px 0px' });
+    const soon = new IntersectionObserver(([e]) => { if (e.isIntersecting) attach(); }, { rootMargin: '300px 0px' });
+    // play only while at least half of it is on screen
+    const seen = new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible) { attach(); play(); } else v.pause();
+    }, { threshold: 0.5 });
+    near.observe(v); soon.observe(v); seen.observe(v);
+
+    const onVis = () => (document.hidden ? v.pause() : play());
+    const onTap = () => play();
+    document.addEventListener('visibilitychange', onVis);
+    window.addEventListener('pointerdown', onTap, { passive: true });
+    return () => {
+      near.disconnect(); soon.disconnect(); seen.disconnect();
+      document.removeEventListener('visibilitychange', onVis);
+      window.removeEventListener('pointerdown', onTap);
+    };
+  }, [media?.src, eager, still]);
+
   if (!media?.src) return null;
+  if (still) return <img className={className} src={media.poster} alt="" {...rest} />;
   return (
     <video
       ref={ref}
       className={className}
-      src={media.src}
       poster={media.poster}
-      autoPlay
       muted
       loop
       playsInline
-      preload="auto"
+      preload={eager ? 'auto' : 'none'}
       disablePictureInPicture
       {...rest}
     />
@@ -33,12 +66,12 @@ export function LoopVideo({ media, className = '', ...rest }) {
 }
 
 /**
- * The slow-motion couple video fills the screen. The opening card sits over this same video,
- * so tapping "open" feels like the invitation lifting away rather than a page change.
- * Desktop: the video also appears inside a temple-arch frame beside the names.
+ * The slow-motion hero video. The opening card sits over this same video, so tapping "open"
+ * feels like the invitation lifting away. Phones: full-screen. Desktop: the video sits in a
+ * temple-arch frame over a blurred still of itself (only one video decoding either way).
  */
 export default function Hero({ site, names }) {
-  const media = site.media?.main;
+  const media = site.media?.hero;
   const [wide, setWide] = useState(() => window.matchMedia?.('(min-width: 860px)').matches);
   useEffect(() => {
     const mq = window.matchMedia?.('(min-width: 860px)');
@@ -51,7 +84,9 @@ export default function Hero({ site, names }) {
   return (
     <section className="hero" id="home">
       <div className="hero__media" aria-hidden="true">
-        {media ? <LoopVideo media={media} className="hero__video" /> : <div className="hero__video" style={{ backgroundImage: `url(${site.photos?.hero})` }} />}
+        {wide
+          ? <div className="hero__video" style={{ backgroundImage: `url(${media?.poster})` }} />
+          : <LoopVideo media={media} eager className="hero__video" />}
         <div className="hero__sepia" />
         <div className="hero__grain" />
       </div>
@@ -62,7 +97,7 @@ export default function Hero({ site, names }) {
       <div className="hero__content">
         {wide && media && (
           <div className="arch reveal zoom">
-            <LoopVideo media={media} className="arch__video" />
+            <LoopVideo media={media} eager className="arch__video" />
             <span className="arch__shine" aria-hidden="true" />
           </div>
         )}

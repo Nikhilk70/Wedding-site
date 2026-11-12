@@ -19,14 +19,14 @@ export default function MotionFrame({ src, motion = 'in', tilt = -2, focus = '50
     >
       <div className="mframe__window">
         {isVideo(src)
-          ? <LoopVideo media={{ src, poster: src.replace(/\.(mp4|webm)$/i, '.jpg') }} className="mframe__media" />
+          ? <LoopVideo media={{ src, poster: src.replace(/\.(mp4|webm)$/i, '.jpg') }} className="mframe__media" style={{ objectPosition: focus }} />
           : <img src={src} alt="" loading="lazy" className={`mframe__media mkb mkb--${motion}`} style={{ objectPosition: focus }} />}
-        <span className="mframe__sun" aria-hidden="true" />
-        <span className="mframe__petals" aria-hidden="true">
+        {!isVideo(src) && <span className="mframe__sun" aria-hidden="true" />}
+        {!isVideo(src) && <span className="mframe__petals" aria-hidden="true">
           {Array.from({ length: 9 }, (_, i) => (
             <i key={i} style={{ '--x': `${(i * 23 + 8) % 92}%`, '--d': `${(i * 1.7) % 9}s`, '--t': `${7 + (i % 4) * 1.5}s`, '--s': `${0.6 + (i % 3) * 0.25}` }} />
           ))}
-        </span>
+        </span>}
       </div>
     </figure>
   );

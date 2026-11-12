@@ -346,3 +346,30 @@ main > .kasavu { margin: 8px 0; box-shadow: 0 1px 0 var(--line), 0 -1px 0 var(--
 @media (prefers-reduced-motion: reduce) {
   .mkb, .mframe__sun, .mframe__petals i { animation: none; }
 }
+
+/* ---------- Chapter interludes (full-width slow-motion clips) ---------- */
+.chapter { position: relative; overflow: hidden; background: #24160a; }
+.chapter__bg { display: none; }
+.chapter__frame { position: relative; height: 88svh; min-height: 520px; }
+.chapter__frame.reveal { transform: scale(1.04); }
+.chapter__frame.reveal.is-visible { transform: none; }
+.chapter__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: sepia(.15) saturate(1.04); }
+.chapter__shade {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(30, 15, 4, .5) 100%),
+    linear-gradient(180deg, rgba(30, 15, 4, .25), transparent 30%, transparent 50%, rgba(30, 15, 4, .8));
+}
+.chapter__text { position: absolute; left: 0; right: 0; bottom: 0; padding: 0 22px 56px; text-align: center; color: #fff; }
+.chapter__title { margin: 0; font-size: clamp(40px, 11vw, 64px); color: #fff; text-shadow: 0 4px 22px rgba(0, 0, 0, .5); }
+.chapter__frame.is-visible .chapter__title { animation: chapter-rise 1.4s var(--ease) .3s both; }
+.chapter__ml { margin: 6px 0 0; font: 500 17px var(--ml); color: var(--gold-3); }
+.chapter__frame.is-visible .chapter__ml { animation: chapter-rise 1.4s var(--ease) .6s both; }
+.chapter__cta { margin-top: 20px; }
+.chapter + .section, .section + .chapter { margin-top: 0; }
+@media (min-width: 860px) {
+  .chapter { padding: 60px 0; }
+  .chapter__bg { display: block; position: absolute; inset: -40px; background: center / cover no-repeat; filter: blur(24px) sepia(.35) brightness(.55); }
+  .chapter__frame { width: min(440px, 40vw); height: auto; aspect-ratio: 9 / 16; min-height: 0; margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 30px 70px -20px rgba(0, 0, 0, .7), 0 0 0 1px var(--gold-2); }
+}
+@keyframes chapter-rise { from { opacity: 0; transform: translateY(24px); letter-spacing: .04em; } to { opacity: 1; transform: none; } }

@@ -17,6 +17,7 @@ import Wishes from './components/Wishes.jsx';
 import Gift from './components/Gift.jsx';
 import Footer from './components/Footer.jsx';
 import ThankYou from './components/ThankYou.jsx';
+import Chapter from './components/Chapter.jsx';
 import BottomNav from './components/BottomNav.jsx';
 import { Divider, TapSparkles, useParallax } from './components/Effects.jsx';
 import { KasavuBand } from './components/Decor.jsx';
@@ -122,10 +123,12 @@ export default function App() {
         <Events site={site} names={names} />
         <Divider />
         <SaveTheDate site={site} names={names} />
+        <Chapter id="chapter-1" media={site.media?.chapter1} title="Two souls, one journey" ml="രണ്ടു ഹൃദയങ്ങൾ, ഒരു യാത്ര" />
         <Schedule site={site} />
         <KasavuBand />
         <Gallery photos={site.photos?.gallery || []} />
         <Gift gift={site.gift} />
+        <Chapter id="chapter-2" media={site.media?.chapter2} title="Will you bless us with your presence?" ml="നിങ്ങളുടെ സാന്നിധ്യം ഞങ്ങളുടെ ഭാഗ്യം" cta={{ href: "#rsvp", label: "RSVP" }} />
         <Rsvp />
         <Wishes />
         <ThankYou site={site} names={names} />

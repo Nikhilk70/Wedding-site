@@ -3,7 +3,7 @@ import { LoopVideo } from './Hero.jsx';
 
 /** Save-the-date: the slow-motion "story" video in a vintage gilded frame. */
 export default function SaveTheDate({ site, names }) {
-  const media = site.media?.story;
+  const media = site.media?.save;
   const photo = site.photos?.saveTheDate;
   if (!media && !photo) return null;
   return (
