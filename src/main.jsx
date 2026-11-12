@@ -5,6 +5,7 @@ import './styles.css';
 import './mobile.css';
 import './thanks.css';
 import './vintage.css';
+import './phone.css';
 
 createRoot(document.getElementById('root')).render(
   <React.StrictMode>

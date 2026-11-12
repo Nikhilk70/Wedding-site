@@ -18,7 +18,6 @@ import Gift from './components/Gift.jsx';
 import Footer from './components/Footer.jsx';
 import ThankYou from './components/ThankYou.jsx';
 import Chapter from './components/Chapter.jsx';
-import BottomNav from './components/BottomNav.jsx';
 import { Divider, TapSparkles, useParallax } from './components/Effects.jsx';
 import { KasavuBand } from './components/Decor.jsx';
 
@@ -135,7 +134,6 @@ export default function App() {
         <Footer site={site} names={names} />
       </main>
 
-      {opened && <BottomNav />}
       {opened && <TapSparkles />}
       {opened && site.music?.file && <MusicToggle playing={playing} onToggle={toggleMusic} />}
     </>

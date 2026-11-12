@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { dotDate, longDate } from '../lib/format.js';
-import { JasmineStrings, KasavuBand, Thoranam } from './Decor.jsx';
+import { JasmineStrings, KasavuBand } from './Decor.jsx';
 
 /* Guests on data-saver or with "reduce motion" get the still poster instead of video. */
 const posterOnly = () =>
@@ -91,7 +91,6 @@ export default function Hero({ site, names }) {
         <div className="hero__grain" />
       </div>
 
-      <Thoranam className="hero__thoranam" />
       <JasmineStrings />
 
       <div className="hero__content">

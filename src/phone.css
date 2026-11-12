@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Phone polish (loaded last). Most guests open the invitation on a phone:
+   readable text, 44px+ tap targets, no sideways overflow, tighter rhythm,
+   app-like RSVP sheet, gallery position dots.
+   ========================================================================== */
+
+/* outlined secondary buttons must stay readable on every background */
+.btn.btn--ghost {
+  background: rgba(255, 250, 238, .92);
+  color: var(--gold);
+  border: 1.5px solid var(--gold-2);
+  box-shadow: none;
+}
+.btn.btn--ghost:hover { background: #fff; color: var(--plum-2); }
+.btn { min-height: 46px; }
+
+/* gallery position dots (phones) */
+.gallery__dots { display: none; }
+@media (max-width: 759px) {
+  .gallery__dots { display: flex; justify-content: center; gap: 10px; margin-top: 2px; }
+  .gallery__dots button {
+    position: relative; width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
+    background: var(--line); cursor: pointer; transition: width .35s var(--ease), background .35s;
+  }
+  .gallery__dots button::after { content: ''; position: absolute; inset: -14px -8px; }  /* bigger tap area */
+  .gallery__dots button.is-on { width: 24px; background: var(--gold); }
+}
+
+@media (max-width: 600px) {
+  html { -webkit-tap-highlight-color: transparent; }
+  body { font-size: 18px; }
+  .container, .narrow { width: calc(100% - 32px); }
+
+  /* rhythm: less empty scrolling */
+  .section { padding: 50px 0; }
+  .section__title { margin-bottom: 18px; font-size: clamp(46px, 13vw, 60px); }
+  .lead { font-size: 19px; margin-bottom: 18px; }
+  main > .kasavu { margin: 0; }
+  .divider { margin: -18px 0; }
+
+  /* readable small labels (min 12px) */
+  .eyebrow { font-size: 12px; letter-spacing: .2em; }
+  .family__rel, .countdown__label, .event__times dt, .thanks__label, .calendar__dow { font-size: 12px; }
+  .timeline__time { font-size: 13px; }
+  .bottomnav a { min-height: 54px; font-size: 11.5px; }
+  .bottomnav svg { width: 23px; height: 23px; }
+
+  /* schedule: rise instead of sliding in from the side (no sideways overflow) */
+  .timeline__item.reveal.from-left,
+  .timeline__item.reveal.from-right { transform: translateY(22px); }
+  .timeline__item.reveal.is-visible { transform: none; }
+  .timeline__body h3 { font-size: 20px; }
+
+  /* events */
+  .event { padding: 34px 18px 28px; }
+  .event__times dd { font-size: 24px; }
+  .event__actions { gap: 10px; }
+  .event__actions .btn { flex: 1 1 100%; font-size: 14.5px; }
+
+  /* countdown + calendar */
+  .countdown__units { margin-bottom: 26px; }
+  .calendar { padding: 16px 14px; }
+  .calendar__grid { font-size: 14.5px; line-height: 2.15; }
+
+  /* framed videos sized for one-handed scrolling */
+  .mframe, .save__frame { width: min(340px, 84vw); }
+  .split, .save__grid { gap: 24px; }
+  .thanks__frame { width: min(300px, 76vw); }
+  .chapter__frame { height: 80svh; min-height: 480px; }
+  .chapter__text { padding-bottom: 44px; }
+
+  /* RSVP as a bottom sheet */
+  dialog.modal {
+    width: 100%; max-width: 100vw; margin: auto 0 0;
+    border-radius: 22px 22px 0 0;
+    max-height: 92svh;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  dialog.modal[open] { animation: sheet-up .45s var(--ease); }
+  .modal__body { padding: 30px 20px 22px; }
+  .modal__body::before {
+    content: ''; display: block; width: 44px; height: 5px; border-radius: 3px;
+    background: var(--line); margin: -14px auto 16px;
+  }
+  .choice { grid-template-columns: 1fr; }
+  .choice label { min-height: 50px; font-size: 17px; }
+
+  /* forms: 16px+ text stops iPhone zooming into fields; full-width buttons */
+  input, textarea { font-size: 17px !important; }
+  .wishes__form .btn, .modal form .btn { width: 100%; }
+  .wish { padding: 16px; }
+
+  /* families & thank-you */
+  .family { padding: 22px 16px; }
+  .thanks__card { padding: 40px 16px 34px; }
+  .thanks__members li { font-size: 17px; padding: 7px 14px; }
+
+  .footer__share .btn { width: min(300px, 100%); }
+}
+
+@media (max-width: 370px) {
+  .hero__names { font-size: 60px; }
+  .countdown__unit { width: 21vw; }
+  .countdown__num { font-size: 30px; }
+  .envelope--video .envelope__names { font-size: 36px; }
+}
+
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+
+/* no bottom navigation bar: give its space back */
+@media (max-width: 859px) {
+  .music { bottom: calc(18px + env(safe-area-inset-bottom)); }
+  .footer { padding-bottom: calc(70px + env(safe-area-inset-bottom)); }
+}
+@media (max-width: 600px) {
+  .hero__content { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+  .jasmine__str { top: 0; }
+}
+@media (max-width: 600px) {
+  .choice label { justify-content: flex-start; gap: 14px; padding: 12px 18px; text-align: left; white-space: nowrap; }
+  .choice input { width: 20px; height: 20px; flex: none; }
+}

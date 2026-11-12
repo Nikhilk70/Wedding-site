@@ -12,6 +12,9 @@ const cal = (
   </svg>
 );
 
+const appleDevice = typeof navigator !== 'undefined' &&
+  (/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1));
+
 function EventCard({ icon, title, ml, date, rows, venue, calendar, delay }) {
   const location = [venue?.name, venue?.address].filter(Boolean).join(', ');
   const mapUrl = venue?.mapUrl || (location && `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`);
@@ -31,8 +34,10 @@ function EventCard({ icon, title, ml, date, rows, venue, calendar, delay }) {
       {venue?.address && <p className="event__address">{venue.address}</p>}
       <div className="event__actions">
         {mapUrl && <a className="btn" href={mapUrl} target="_blank" rel="noopener noreferrer">{pin} Get directions</a>}
-        <a className="btn btn--ghost" href={googleCalendarUrl(calendar)} target="_blank" rel="noopener noreferrer">{cal} Google Calendar</a>
-        <a className="btn btn--ghost" href={icsDataUrl(calendar)} download={`${title.toLowerCase()}.ics`}>{cal} Apple / Outlook</a>
+        {/* one button: iPhone/iPad/Mac get an .ics file (opens Apple Calendar), others get Google Calendar */}
+        {appleDevice
+          ? <a className="btn btn--ghost" href={icsDataUrl(calendar)} download={`${title.toLowerCase()}.ics`}>{cal} Add to calendar</a>
+          : <a className="btn btn--ghost" href={googleCalendarUrl(calendar)} target="_blank" rel="noopener noreferrer">{cal} Add to calendar</a>}
       </div>
     </article>
   );

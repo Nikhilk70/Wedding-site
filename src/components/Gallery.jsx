@@ -7,6 +7,18 @@ const asMedia = (src) => ({ src, poster: src.replace(/\.(mp4|webm)$/i, '.jpg') }
 export default function Gallery({ photos }) {
   const [open, setOpen] = useState(-1);
   const touchX = useRef(null);
+  const track = useRef(null);
+  const [slide, setSlide] = useState(0);
+  const onTrackScroll = () => {
+    const el = track.current;
+    const item = el?.firstElementChild;
+    if (!el || !item) return;
+    setSlide(Math.round(el.scrollLeft / (item.offsetWidth + 14)));
+  };
+  const goTo = (i) => {
+    const el = track.current;
+    el?.children[i]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  };
 
   const close = useCallback(() => setOpen(-1), []);
   const step = useCallback((dir) => setOpen((i) => (i + dir + photos.length) % photos.length), [photos.length]);
@@ -32,17 +44,22 @@ export default function Gallery({ photos }) {
         <p className="eyebrow reveal">Moments</p>
         <h2 className="section__title script reveal">Our Gallery</h2>
         <p className="gallery__swipe" aria-hidden="true">Swipe <span>→</span></p>
-        <div className="gallery__grid">
+        <div className="gallery__grid" ref={track} onScroll={onTrackScroll}>
           {photos.map((src, i) => (
             <button
               key={src}
               className={`gallery__item reveal zoom g${i % 6}`}
               style={{ '--d': `${(i % 3) * 0.1}s` }}
               onClick={() => setOpen(i)}
-              aria-label={`Open photo ${i + 1}`}
+              aria-label={`Open video ${i + 1}`}
             >
               {isVideo(src) ? <LoopVideo media={asMedia(src)} /> : <img src={src} alt="" loading="lazy" />}
             </button>
+          ))}
+        </div>
+        <div className="gallery__dots" role="tablist" aria-label="Gallery position">
+          {photos.map((_, i) => (
+            <button key={i} className={i === slide ? 'is-on' : ''} onClick={() => goTo(i)} aria-label={`Go to video ${i + 1}`} />
           ))}
         </div>
       </div>
