@@ -76,12 +76,6 @@
     "main": "/photos/5.jpeg",
     "saveTheDate": "/photos/2.jpeg",
     "background": [],
-    "gallery": [
-      "/videos/gallery-1.mp4",
-      "/videos/gallery-2.mp4",
-      "/videos/gallery-3.mp4",
-      "/videos/gallery-4.mp4"
-    ],
     "reel": [
       {
         "src": "/photos/5.jpeg",

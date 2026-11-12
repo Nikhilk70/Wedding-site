@@ -11,7 +11,6 @@ import Countdown from './components/Countdown.jsx';
 import Events from './components/Events.jsx';
 import SaveTheDate from './components/SaveTheDate.jsx';
 import Schedule from './components/Schedule.jsx';
-import Gallery from './components/Gallery.jsx';
 import Rsvp from './components/Rsvp.jsx';
 import Wishes from './components/Wishes.jsx';
 import Gift from './components/Gift.jsx';
@@ -125,7 +124,6 @@ export default function App() {
         <SaveTheDate site={site} names={names} />
         <Schedule site={site} />
         <KasavuBand />
-        <Gallery photos={site.photos?.gallery || []} />
         <Gift gift={site.gift} />
         <Chapter id="chapter-2" media={site.media?.chapter2} title="Will you bless us with your presence?" ml="നിങ്ങളുടെ സാന്നിധ്യം ഞങ്ങളുടെ ഭാഗ്യം" cta={{ href: "#rsvp", label: "RSVP" }} />
         <Rsvp />
